@@ -315,3 +315,6 @@ ggplot( insurance , aes(x = smoker, y = charges ) ) +
   coord_flip()
 
 ################################################
+
+
+usethis::use_git()
