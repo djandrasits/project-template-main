@@ -1,0 +1,50 @@
+---
+title: "Second wave of COVID-19 ub Switzerland"
+author: "Damian Jandrasits" 
+date: "`r date()`"
+format: 
+  html: 
+    toc: true
+    code-fold: show
+    code-tools: true
+    df-print: paged
+    
+
+
+---
+
+```{r}
+#| output: false
+#load libraries
+library(here)
+library(tidyverse)
+library(lubridate)
+library(unibeCols)
+```
+
+## Introduction 
+The aim of this exercise is to visualize the increase in laboratory-confirmed cases of COVID-19 in Switzerland during autumn 2020. 
+
+## Data
+
+Load data from FOPH. 
+
+```{r}
+#| output: false
+# Read data
+cases <- read_csv(here(("data/raw/Covid19Cases_geoRegion.csv")))
+```
+
+```{r}
+#Process data
+region <- "CH"
+window_start <- ymd("2020-09-01")
+window_end <- ymd("2020-11-30")
+cases <- cases |> 
+  filter(geoRegion == region & datum >= window_start & datum <= window_end) |>
+  select(datum, entries)
+
+ggplot(cases, aes(x=))
+```
+
+

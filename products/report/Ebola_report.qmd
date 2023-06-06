@@ -1,0 +1,33 @@
+---
+title: "Ebola Cases"
+author: "Damian Jandrasits" 
+format: html
+date: "`r date()`"
+---
+
+## Introduction 
+
+Ebola virus (EBOV) is a member of the filoviridae familiy. Infection results in 25-75% of cases in the death of the affected person. In 2014, the most devastating outbreak of EBOV occurred Westafrica, where more than 11'000 people succumbed to the disease. 
+
+```{r}
+#| output: false
+#load libraries
+library(here)
+library(tidyverse)
+library(lubridate)
+library(unibeCols)
+library(dplyr)
+library(ggplot2)
+```
+```{r}
+ebola <- read_csv("data/raw/ebola.csv")
+ebola_countries <- ebola %>% filter(Date <= as.Date("2015-03-31") 
+                                       & (Country == "Guinea" | Country == "Liberia" | Country == "Sierra Leone"))
+plot_ebola_point_v3 <- ggplot(data = ebola_countries, 
+                              mapping = aes(x = Date, y = Cum_conf_cases, fill = Country, colour = Country)) + 
+  geom_point(alpha = 0.7, shape = 21, size = 1.5, stroke = 1.5) +
+  ggtitle(label = "Confirmed Ebola cases") +
+  xlab(label = "Time") +
+  ylab(label = "# of confirmed cases")
+plot_ebola_point_v3
+```
